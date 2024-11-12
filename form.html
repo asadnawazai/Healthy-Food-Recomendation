@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Recommendation</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { max-width: 800px; margin: 50px auto; text-align: center; }
+        table { width: 100%; margin-top: 20px; border-collapse: collapse; }
+        th, td { padding: 8px; border: 1px solid #ddd; text-align: center; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Food Recommendation System</h1>
+        <form action="/recommend" method="post">
+            <label for="disease">Select Disease:</label>
+            <input type="text" id="disease" name="disease" required>
+            <button type="submit">Get Recommendations</button>
+        </form>
+        
+        {% if user_recs %}
+            <h2>Top 5 Recommended Foods for {{ request.form['disease'] }} (User's Own):</h2>
+            <div>{{ user_recs | safe }}</div>
+        {% endif %}
+        
+        {% if dutch_recs %}
+            <h2>Top 5 Recommended Dutch Dishes for {{ request.form['disease'] }}:</h2>
+            <div>{{ dutch_recs | safe }}</div>
+        {% endif %}
+        
+        {% if german_recs %}
+            <h2>Top 5 Recommended German Dishes for {{ request.form['disease'] }}:</h2>
+            <div>{{ german_recs | safe }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
